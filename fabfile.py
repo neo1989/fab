@@ -9,9 +9,10 @@ env.password = PASSWORD
 
 
 def native():
-    with cd(Local_depot):
+    with cd(LOCAL_DEPOT):
         local('tar czvf /tmp/this.tar.gz *')
-    local('cd /tmp/ && scp this.tar.gz %s:/tmp/remote/' % HOSTS)
+    for host in HOSTS: 
+        local('scp /tmp/this.tar.gz  %s:/tmp/' % host)
 
 def remote():
     print 'remote operate'
