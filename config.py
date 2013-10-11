@@ -5,7 +5,8 @@ HOSTS = ['test@127.0.0.1']
 PASSWORD = '123456'
 
 
-PROJECT = 'test'
+PROJECT_NAME = 'fab' #项目名称
+LOCAL_DEPOT = '/tmp/fab/' #本地项目仓库
 
 
 #EOF
