@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 
-HOSTS = ['test@127.0.0.1']
+USER = 'test'
+HOSTS = ['127.0.0.1']
 PASSWORD = '123456'
 
 
