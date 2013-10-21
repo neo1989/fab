@@ -6,8 +6,9 @@ HOSTS = ['127.0.0.1']
 PASSWORD = '123456'
 
 
+LOCAL_DEPOT = '/tmp/depot/' #临时项目仓库
 PROJECT_NAME = 'fab' #项目名称
-LOCAL_DEPOT = '/tmp/fab/' #本地项目仓库
+GIT_DEOPT = 'https://github.com/neo1989/fab.git'
 
 
 #EOF
