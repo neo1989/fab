@@ -32,7 +32,9 @@ def before():
     dest = LOCAL_DEPLOY 
 
     for f in x['files']:
-        m = re.split(r'\/',f)
+        if f.endswith('/'):
+            f = f[:-1]
+        m = re.split(r'/',f)
         _mkdir(m[:-1])
         local('cp -R %s %s' % (source+f,dest+f))
 
