@@ -1,8 +1,7 @@
 commit:
-    a093b055d33a742dc6f266f4e2d44f81865806de 
+    f5671f6de86b37e5caaca7aa5b9554e3a7da6447 
 
 files:
-    - README.md
-    - config.py
-    - fabfile.py
+    - config.py 
+    - templates/index.html 
 

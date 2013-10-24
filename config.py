@@ -6,9 +6,10 @@ HOSTS = ['127.0.0.1']
 PASSWORD = '123456'
 
 
+PROJECT_NAME = 'Fileserver' #项目名称
 LOCAL_DEPOT = '/tmp/depot/' #临时项目仓库
-PROJECT_NAME = 'fab' #项目名称
-GIT_DEOPT = 'https://github.com/neo1989/fab.git'
+LOCAL_DEPLOY = '/tmp/deploy/' 
+GIT_DEOPT = 'https://github.com/neo1989/Fileserver.git'
 
 
 #EOF
