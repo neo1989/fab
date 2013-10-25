@@ -3,7 +3,8 @@
 import yaml
 import os
 import re
-from fabric.api import local,lcd,cd,run,env,put
+import time
+from fabric.api import local,lcd,cd,run,env,put,sudo,settings
 from config import *
 
 env.user = USER
@@ -13,7 +14,7 @@ env.password = PASSWORD
 yml = open('yml')
 x = yaml.load(yml)
 
-def before():
+def collect():
     if os.path.exists(LOCAL_DEPOT):
         local('rm %s -rf' % LOCAL_DEPOT)
     local('mkdir -p %s' % LOCAL_DEPOT)
@@ -44,14 +45,28 @@ def _mkdir(data=[]):
         local('mkdir -p %s' % path)
 
 def upload():
-    print 'upload tar file'
-    put('/tmp/this.tar.gz','/tmp/target.tar.gz')
+    with lcd(LOCAL_DEPLOY):
+        local('tar czvf /tmp/target.tar.gz *'),
+    put('/tmp/target.tar.gz','/tmp/target.tar.gz')
 
 def remote():
-    print 'remote operation'
-    with cd('/tmp'):
-        run('tree')
+    run('rm -rf /tmp/target/')
+    run('mkdir /tmp/target/')
+    run('tar xvf /tmp/target.tar.gz -C /tmp/target/')
+
+    #备份生产环境代码
+    t = time.strftime("%Y%m%d%H%M%S",time.localtime(time.time()))
+    with cd(REMOTE_DEPOT):
+        run('tar czvf %s%s.tar.gz *' % (REMOTE_BACKUP,t))
+
+    #更新代码
+    run('cp /tmp/target/* %s -R' % REMOTE_DEPOT)
+
+    #reload
+    run('touch /tmp/reload')
 
 
 def start():
-    before()
+    collect()
+    upload()
+    remote()

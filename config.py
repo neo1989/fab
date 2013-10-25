@@ -11,6 +11,9 @@ LOCAL_DEPOT = '/tmp/depot/' #临时项目仓库
 LOCAL_DEPLOY = '/tmp/deploy/' 
 GIT_DEOPT = 'https://github.com/neo1989/Fileserver.git'
 
+REMOTE_DEPOT = '/var/www/' #生产环境根目录
+REMOTE_BACKUP = '/data/webbackup/' #生产环境备份目录
+ 
 
 #EOF
 #加载服务器配置

@@ -1,8 +1,6 @@
 commit:
-    f5671f6de86b37e5caaca7aa5b9554e3a7da6447 
+    1069959f8cd2babcf14d2b8a0aa5e9ec6dc3e22e 
 
 files:
-    - config.py 
     - templates/index.html 
-    - static/
 
