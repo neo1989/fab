@@ -63,7 +63,8 @@ def remote():
     run('cp /tmp/target/* %s -R' % REMOTE_DEPOT)
 
     #reload
-    run('touch /tmp/reload')
+    for r in RELOAD:
+        run(r)
 
 
 def start():
