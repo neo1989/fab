@@ -20,10 +20,10 @@ def collect_from_git():
     local('mkdir -p %s' % TMP_DEPOT)
 
     os.chdir(TMP_DEPOT)
-    local('/usr/bin/git clone %s' % GIT_DEOPT)
+    local('git clone %s' % GIT_DEOPT)
 
     os.chdir(TMP_DEPOT+PROJECT_NAME)
-    local('/usr/bin/git checkout %s' % x['commit'])
+    local('git checkout %s' % x['commit'])
 
     if os.path.exists(TMP_DEPLOY):
         local('rm %s -rf' % TMP_DEPLOY)
