@@ -10,7 +10,7 @@ fab
 
 usage: 
 
-    1.  更新config.py或添加config_extend.py文件
+    1.  更新config.py或添加conf_extend.py文件
 
     2.  更新yml文件
     
