@@ -14,23 +14,23 @@ env.password = PASSWORD
 yml = open('yml')
 x = yaml.load(yml)
 
-def collect():
-    if os.path.exists(LOCAL_DEPOT):
-        local('rm %s -rf' % LOCAL_DEPOT)
-    local('mkdir -p %s' % LOCAL_DEPOT)
+def collect_from_git():
+    if os.path.exists(TMP_DEPOT):
+        local('rm %s -rf' % TMP_DEPOT)
+    local('mkdir -p %s' % TMP_DEPOT)
 
-    os.chdir(LOCAL_DEPOT)
+    os.chdir(TMP_DEPOT)
     local('/usr/bin/git clone %s' % GIT_DEOPT)
 
-    os.chdir(LOCAL_DEPOT+PROJECT_NAME)
+    os.chdir(TMP_DEPOT+PROJECT_NAME)
     local('/usr/bin/git checkout %s' % x['commit'])
 
-    if os.path.exists(LOCAL_DEPLOY):
-        local('rm %s -rf' % LOCAL_DEPLOY)
-    local('mkdir -p %s' % LOCAL_DEPLOY)
+    if os.path.exists(TMP_DEPLOY):
+        local('rm %s -rf' % TMP_DEPLOY)
+    local('mkdir -p %s' % TMP_DEPLOY)
 
-    source = LOCAL_DEPOT + PROJECT_NAME +'/'
-    dest = LOCAL_DEPLOY 
+    source = TMP_DEPOT + PROJECT_NAME +'/'
+    dest = TMP_DEPLOY 
 
     for f in x['files']:
         if f.endswith('/'):
@@ -39,13 +39,29 @@ def collect():
         _mkdir(m[:-1])
         local('cp -R %s %s' % (source+f,dest+f))
 
+def collect_from_local():
+    if os.path.exists(TMP_DEPLOY):
+        local('rm %s -rf' % TMP_DEPLOY)
+    local('mkdir -p %s' % TMP_DEPLOY)
+
+    source = LOCAL_DEPOT
+    dest = TMP_DEPLOY 
+
+    for f in x['files']:
+        if f.endswith('/'):
+            f = f[:-1]
+        m = re.split(r'/',f)
+        _mkdir(m[:-1])
+        local('cp -R %s %s' % (source+f,dest+f))
+
+
 def _mkdir(data=[]):
-    path = LOCAL_DEPLOY + '/'.join(data)
+    path = TMP_DEPLOY + '/'.join(data)
     if not os.path.exists(path):
         local('mkdir -p %s' % path)
 
 def upload():
-    with lcd(LOCAL_DEPLOY):
+    with lcd(TMP_DEPLOY):
         local('tar czvf /tmp/target.tar.gz *'),
     put('/tmp/target.tar.gz','/tmp/target.tar.gz')
 
@@ -57,7 +73,7 @@ def remote():
     #备份生产环境代码
     t = time.strftime("%Y%m%d%H%M%S",time.localtime(time.time()))
     with cd(REMOTE_DEPOT):
-        run('tar czvf %s%s.tar.gz *' % (REMOTE_BACKUP,t))
+        run('tar czvf %s%s_%s.tar.gz *' % (REMOTE_BACKUP,PROJECT_NAME,t))
 
     #更新代码
     run('cp /tmp/target/* %s -R' % REMOTE_DEPOT)
@@ -66,8 +82,12 @@ def remote():
     for r in RELOAD:
         run(r)
 
+def g():
+    collect_from_git()
+    upload()
+    remote()
 
-def start():
-    collect()
+def l():
+    collect_from_local()
     upload()
     remote()

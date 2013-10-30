@@ -7,11 +7,13 @@ PASSWORD = '123456'
 
 
 PROJECT_NAME = 'Fileserver' #项目名称
-LOCAL_DEPOT = '/tmp/depot/' #临时项目仓库
-LOCAL_DEPLOY = '/tmp/deploy/' 
+TMP_DEPOT = '/tmp/depot/'   #临时项目仓库
+TMP_DEPLOY = '/tmp/deploy/' #发布区 
 GIT_DEOPT = 'https://github.com/neo1989/Fileserver.git'
 
-REMOTE_DEPOT = '/var/www/' #生产环境根目录
+
+LOCAL_DEPOT = '/var/www/fileserver/' #本地开发环境根目录
+REMOTE_DEPOT = '/var/www/fileserver/' #生产环境根目录
 REMOTE_BACKUP = '/data/webbackup/' #生产环境备份目录
 
 RELOAD = ['touch /tmp/reload',] #重启相关服务
