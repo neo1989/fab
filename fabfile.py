@@ -11,7 +11,7 @@ env.user = USER
 env.hosts = HOSTS
 env.password = PASSWORD
 
-yml = open('yml')
+yml = open(YML)
 x = yaml.load(yml)
 
 def collect_from_git():

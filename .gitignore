@@ -1,2 +1,3 @@
 conf_extend.py
 *.pyc
+*.yml

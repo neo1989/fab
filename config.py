@@ -5,6 +5,7 @@ USER = 'test'
 HOSTS = ['127.0.0.1']
 PASSWORD = '123456'
 
+YML = 'yml' #yml配置的filename
 
 PROJECT_NAME = 'Fileserver' #项目名称
 TMP_DEPOT = '/tmp/depot/'   #临时项目仓库
