@@ -1,6 +1,39 @@
 commit:
-    1069959f8cd2babcf14d2b8a0aa5e9ec6dc3e22e 
+    599ce918d7862f1c1f489f4b9b745c9a72aaac89 
 
 files:
-    - templates/index.html 
+    - fabric.py 
+
+
+
+
+#####fab g#####
+PROJECT_NAME :              #项目名称
+    fab      
+
+TMP_DEPOT :                 #临时项目仓库
+    /tmp/depot/     
+
+TMP_DEPLOY :                #发布区 
+    /tmp/deploy/
+
+GIT_DEOPT :                 #远程GIT仓库 
+    https://github.com/neo1989/fab.git
+
+
+
+#####fab l#####
+LOCAL_DEPOT :               #本地开发环境根目录
+    /var/www/fab/
+
+REMOTE_DEPOT :              #生产环境根目录
+    /var/www/fab/
+
+REMOTE_BACKUP :             #生产环境备份目录
+    /data/backup/
+
+RELOAD :                    #重启相关服务
+    - nginx -s reload 
+ 
+
 
