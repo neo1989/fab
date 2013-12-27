@@ -104,8 +104,11 @@ def remote():
     run('cp /tmp/target/* %s -R' % REMOTE_DEPOT)
 
     #reload
-    for r in RELOAD:
-        sudo(r)
+    if RELOAD: 
+        for r in RELOAD:    
+            if r:
+                sudo(r) 
+
 
 @loadConfig
 def g(yml):
@@ -118,3 +121,6 @@ def l(yml):
     collect_from_local()
     upload()
     remote()
+
+
+
