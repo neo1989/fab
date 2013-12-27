@@ -12,6 +12,6 @@ usage:
 
     1.  更新config.py或添加conf_extend.py文件
 
-    2.  更新yml文件或添加xx.py文件
+    2.  更新yml文件或添加xx.yml文件
     
     3.  在项目根目录下运行 fab g:yml=xx.yml (或者 fab l:yml=xx.yml) 
