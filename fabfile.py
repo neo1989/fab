@@ -104,11 +104,8 @@ def remote():
     run('cp /tmp/target/* %s -R' % REMOTE_DEPOT)
 
     #reload
-    if RELOAD: 
-        for r in RELOAD:    
-            if r:
-                sudo(r) 
-
+    if RELOAD:
+        map(lambda r: sudo(x), filter(lambda x: x,RELOAD))
 
 @loadConfig
 def g(yml):
