@@ -105,7 +105,7 @@ def remote():
 
     #reload
     if RELOAD:
-        map(lambda r: sudo(x), filter(lambda x: x,RELOAD))
+        map(lambda r: sudo(r), filter(lambda x: x,RELOAD))
 
 @loadConfig
 def g(yml):
