@@ -35,6 +35,7 @@ def loadConfig(func):
         RELOAD = x['RELOAD']                        # 重启相关服务
 
         return func(*args, **kwargs)
+
     return inner
 
 
@@ -107,7 +108,8 @@ def remote():
 
     # reload
     if RELOAD:
-        map(lambda r: sudo(r), filter(lambda x: x, RELOAD))
+        with cd(REMOTE_DEPOT):
+            map(lambda r: sudo(r), filter(lambda x: x, RELOAD))
 
 
 @loadConfig
